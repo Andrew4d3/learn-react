@@ -2,22 +2,29 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 class App extends React.Component{
+
+  constructor(){
+    super()
+    this.state = {
+      txt: 'this is the initial state',
+      cat: 0
+    }
+  }
+
+  update(e){
+    this.setState({txt: e.target.value})
+  }
+
   render(){
-    let txt = this.props.txt
-    let cat = this.props.cat
-    return <h1>{txt} - {cat}</h1>
+    return (
+      <div>
+        <input type="text"
+          onChange={this.update.bind(this)} />
+        <h1>{this.state.txt}</h1>
+      </div>
+    )
   }
 }
 
-// This will perform some validations
-App.propTypes = {
-  txt: React.PropTypes.string,
-  cat: React.PropTypes.number.isRequired
-}
 
-// If we define txt value, this will be overwritten
-App.defaultProps = {
-  txt: 'This is the default text'
-}
-
-ReactDOM.render(<App cat={5} />, document.getElementById('app'))
+ReactDOM.render(<App />, document.getElementById('app'))
