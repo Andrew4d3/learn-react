@@ -1,14 +1,18 @@
 import React from 'react'
 
 /* This is stateful */
-// class App extends React.Component{
-//   render(){
-//     // return React.createElement('h1', null, 'Hello Guys') //Alternative way
-//     return <h1>Hello guys!</h1>
-//   }
-// }
+class App extends React.Component{
+  render(){
 
-/* This is stateless */
-const App = () => <h1>Hello Eggheads</h1>
+    // return <h1> Hello Guys </h1> <b>Hi Again!</b> // WRONG! It must be wrapped into a single DOM element
+    return (
+      <div>
+        <h1>Hello guys!</h1>
+        <b>Hi again</b>
+      </div>
+    )
+  }
+}
+
 
 export default App
