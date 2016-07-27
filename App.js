@@ -1,6 +1,7 @@
+/* Not used at this lesson */
+
 import React from 'react'
 
-/* This is stateful */
 class App extends React.Component{
   render(){
 
