@@ -1,55 +1,35 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-let Mixin = InnerComponent => class extends React.Component {
+class App extends React.Component{
+
   constructor(){
     super()
-    this.state = { val: 0}
-    this.update = this.update.bind(this)
-  }
-
-  update(){
-    this.setState({val: this.state.val + 1})
-  }
-
-  componentWillMount(){
-    console.log('will unmount');
-  }
-
-  componentDidMount(){
-    console.log('mounted');
+    this.state = {
+      data: [
+        { id: 1, name: "Puyol"},
+        { id: 2, name: "Xavi"},
+        { id: 3, name: "Iniesta"},
+        { id: 4, name: "Messi"}
+      ]
+    }
   }
 
   render(){
-    return (<InnerComponent update={this.update} {...this.state} {...this.props} />)
+    /* Key is important. Otherwise we get an error here */
+    let rows = this.state.data.map( (person) => <PersonRow key={person.id} data={person} /> )
+    return (<table><tbody>{rows}</tbody></table>)
   }
 
 }
 
-const Button = (props) =>{
+const PersonRow = (props) => {
   return (
-    <button onClick={props.update}>
-      {props.txt} - {props.val}
-    </button>
+    <tr>
+      <td>{props.data.id}</td>
+      <td>{props.data.name}</td>
+    </tr>
   )
 }
-
-const Label = (props) =>{
-  return (
-    <label onMouseMove={props.update}>
-      {props.txt} - {props.val}
-    </label>
-  )
-}
-
-let ButtonMixed = Mixin(Button)
-let LabelMixed = Mixin(Label)
-
-class App extends React.Component{
-  render(){
-    return (<div><ButtonMixed txt="Button" /><LabelMixed txt="Button" /></div>)
-  }
-}
-
 
 ReactDOM.render(<App />, document.getElementById('app'))
